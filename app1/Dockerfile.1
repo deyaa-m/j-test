@@ -1,0 +1,25 @@
+FROM java as java
+#FROM maven:3.5.2-jdk-8-alpine as maven
+COPY ./src/main/java/ /app/
+ENV MAVEN_VERSION 3.3.9
+
+workdir /app/
+
+RUN mkdir -p /usr/share/maven \
+  && curl -fsSL http://apache.osuosl.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz \
+    | tar -xzC /usr/share/maven --strip-components=1 \
+  && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+run mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -Dinte
+
+COPY ./src/main/java/* /app/
+copy ./pom.xml /app/
+workdir /app/
+RUN mvn package
+
+#### 
+
+from tomcat 
+
+copy --from=maven: /app/target/*.war /webapp/ 
+
+expose 123

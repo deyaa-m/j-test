@@ -1,0 +1,27 @@
+version: "3"
+services :
+
+        app1 :  
+         image : j-test_app1
+         ports : 
+          - "81:8080"
+         container_name : app1
+
+
+        app2 :
+         build : 
+          context : ./app2 
+          dockerfile : app2
+         ports : 
+          - "82:8080"
+         container_name : app2
+
+        r-prox :
+         build : ./r-prox
+         ports : 
+          - "80:80" 
+
+         links : 
+          - app1 
+          - app2 
+         container_name : r-prox
