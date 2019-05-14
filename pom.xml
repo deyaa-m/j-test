@@ -4,26 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<repositories>
-    <repository>
-      <id>maven-group</id>
-      <url>http://127.0.0.1:8091/repository/maven-group/</url>
-    </repository>
-  </repositories>
-</project>
- 
- <distributionManagement>
-    <snapshotRepository>
-      <id>nexus-snapshots</id>
-      <url>http://your-host:8081/repository/maven-snapshots/</url>
-    </snapshotRepository>
-    <repository>
-      <id>nexus-releases</id>
-      <url>http://your-host:8081/repository/maven-releases/</url>
-    </repository>
-  </distributionManagement>
-</project>
-
 	<groupId>devopsarea</groupId>
 	<artifactId>devopsarea</artifactId>
 	<version>1.0</version>
@@ -72,3 +52,24 @@
 		</plugins>
 	</build>
 </project>
+
+ <repositories>
+    <repository>
+      <id>maven-group</id>
+      <url>http://127.0.0.1:8091/repository/maven-group/</url>
+    </repository>
+  </repositories>
+</project>
+
+<distributionManagement>
+    <snapshotRepository>
+      <id>nexus-snapshots</id>
+      <url>http://127.0.0.1:8091/repository/maven-snapshots/</url>
+    </snapshotRepository>
+    <repository>
+      <id>nexus-releases</id>
+      <url>http://127.0.0.1:8091/repository/maven-releases/</url>
+    </repository>
+  </distributionManagement>
+</project>
+
