@@ -53,23 +53,4 @@
 	</build>
 </project>
 
- <repositories>
-    <repository>
-      <id>maven-group</id>
-      <url>http://127.0.0.1:8091/repository/maven-group/</url>
-    </repository>
-  </repositories>
-</project>
-
-<distributionManagement>
-    <snapshotRepository>
-      <id>nexus-snapshots</id>
-      <url>http://127.0.0.1:8091/repository/maven-snapshots/</url>
-    </snapshotRepository>
-    <repository>
-      <id>nexus-releases</id>
-      <url>http://127.0.0.1:8091/repository/maven-releases/</url>
-    </repository>
-  </distributionManagement>
-</project>
 
