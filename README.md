@@ -11,8 +11,7 @@ Steps are the following:
        
        
        
-       
-       
+      
        
      + --> copy pom.xml to /tmp <br />
      + --> copy folder "src" to /tmp/src <br />
