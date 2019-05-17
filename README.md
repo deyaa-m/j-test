@@ -9,8 +9,6 @@ Steps are the following:
         A. Create maven container <br />
        
        
-       
-       
       
        
      + --> copy pom.xml to /tmp <br />
