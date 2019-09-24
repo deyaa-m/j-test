@@ -5,8 +5,6 @@ Steps are the following:
 
 
 
-
-
 1. Clone the repository to your local machine
 2. The Dockerfile will do:
 
