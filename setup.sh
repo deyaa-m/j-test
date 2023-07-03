@@ -17,7 +17,13 @@ sleep 5
 
 echo "==================================== clone pub"
 chmod 600 $location
-GIT_SSH_COMMAND="ssh -vT -i ${location} -o StrictHostKeyChecking=no" git clone git@github.com:deyaa-m/j-test.git
+if [[ $(GIT_SSH_COMMAND="ssh -vT -i ${location} -o StrictHostKeyChecking=no" git clone git@github.com:deyaa-m/j-test.git) ]]; then
+    echo "success"
+else
+    echo "fail"
+fi
+
+sleep 5
 #git clone git@github.com:deyaa-m/j-test.git ~/app
 
 ls -al ~/app
