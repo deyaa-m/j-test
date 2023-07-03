@@ -3,7 +3,7 @@ set -x
 location=~/.ssh/git-key
 pub_key=/tmp/pub_key
 
-chmod +x /tmp/*
+sudo chmod +x /tmp/*
 
 sudo apt update
 sudo apt install git -y
