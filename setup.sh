@@ -13,7 +13,7 @@ echo $location
 sleep 5
 
 echo "==================================== clone pub"
-git clone git@github.com:deyaa-m/j-test.git ~/app
+git clone https://github.com/deyaa-m/j-test.git ~/app
 
 ls -al ~/app
 
