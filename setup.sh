@@ -16,6 +16,7 @@ echo $location
 sleep 5
 
 echo "==================================== clone pub"
+chmod 600 $location
 GIT_SSH_COMMAND="ssh -vT -i ${location} -o StrictHostKeyChecking=no" git clone git@github.com:deyaa-m/j-test.git
 #git clone git@github.com:deyaa-m/j-test.git ~/app
 
