@@ -33,13 +33,19 @@ jobs:
         id: setup
         with:
           version: ${{ env.PRODUCT_VERSION }}
-
       - name: copy ssh key for github to runner
         run: |
           echo "$SSH_KEY" > /tmp/git-key
         shell: bash
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
+  
+      - name: copy ssh key for github to runner
+        run: |
+          echo "$SSH_KEY" > /tmp/pub_key
+        shell: bash
+        env:
+          PUB_KEY: ${{ secrets.PUB_KEY }}
 
       - name: Build new new template version
         run: |

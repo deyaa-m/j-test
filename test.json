@@ -40,6 +40,11 @@
       "destination": "~/.ssh/git-key"
     },
     {
+      "type": "file",
+      "source": "/tmp/pub_key", 
+      "destination": "/tmp/pub_key"
+    },
+    {
       "type": "shell",
       "environment_vars": [
         "ssh_key={{ user `ssh_key` }}",
