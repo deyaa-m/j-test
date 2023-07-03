@@ -46,14 +46,6 @@
         "repo={{ user `repo` }}"
       ],
       "scripts": ["setup.sh"]
-    },
-    {
-      "type": "ansible-local",
-      "playbook_file": "./ansible/playbook.yml",
-      "extra_arguments": [
-        "--extra-vars",
-        "\"node_version=${node_version}\""
-      ]
     }
   ],
   "post-processors": [
