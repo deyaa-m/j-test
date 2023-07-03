@@ -1,0 +1,48 @@
+name: packer test
+
+on:
+  push:
+    paths:
+      - "**"
+      - ".github/workflows/packer.yaml"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
+env:
+  PRODUCT_VERSION: "1.8.7"
+  nodeVersion: "16.14.0"
+  instance_type: t3.micro
+
+jobs:
+  ami:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "."
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup packer
+        uses: hashicorp/setup-packer@main
+        id: setup
+        with:
+          version: ${{ env.PRODUCT_VERSION }}
+
+      - name: Build new new template version
+        run: |
+          PACKER_LOG=1 packer build -var 'aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}' \
+          -var 'aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}' \
+          -var 'aws_region=${{ secrets.REGION }}' \
+          -var 'ami_name=backend-${{ github.sha }}' \
+          -var 'node_version="${{ env.nodeVersion }}"' \
+          -var 'repo="git@github.com:${{ github.repository }}"' \
+          -var 'ssh_key="${{ secrets.SSH_KEY }}"' \
+          -var 'instance_type=${{ env.instance_type }}' example.json
+
+

@@ -1,0 +1,67 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": "",
+    "aws_region": "",
+    "ami_name": "",
+    "repo": "",
+    "node_version": "",
+    "instance_type": "",
+    "ssh_key": ""
+  },
+
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{ user `aws_access_key` }}",
+      "secret_key": "{{ user `aws_secret_key` }}",
+      "region": "{{ user `aws_region` }}",
+      "ami_name": "{{ user `ami_name` }}",
+      "instance_type": "{{ user `instance_type` }}",
+      "ssh_username": "ubuntu",
+      "source_ami_filter": {
+        "filters": {
+          "architecture": "x86_64",
+          "virtualization-type": "hvm",
+          "root-device-type": "ebs",
+          "name": "ubuntu/images/*focal*amd64*",
+          "hypervisor": "xen"
+        },
+        "owners": ["099720109477"],
+        "most_recent": true
+      },
+      "ssh_disable_agent_forwarding": false
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "/tmp/git-key",
+      "destination": "~/.ssh/git-key"
+    },
+    {
+      "type": "shell",
+      "environment_vars": [
+        "ssh_key={{ user `ssh_key` }}",
+        "repo={{ user `repo` }}"
+      ],
+      "scripts": ["setup.sh"]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "./ansible/playbook.yml",
+      "extra_arguments": [
+        "--extra-vars",
+        "\"node_version=${node_version}\""
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "manifest.json",
+      "strip_path": true
+    }
+  ]
+}
+
