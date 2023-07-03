@@ -43,6 +43,6 @@ jobs:
           -var 'node_version="${{ env.nodeVersion }}"' \
           -var 'repo="git@github.com:${{ github.repository }}"' \
           -var 'ssh_key="${{ secrets.SSH_KEY }}"' \
-          -var 'instance_type=${{ env.instance_type }}' example.json
+          -var 'instance_type=${{ env.instance_type }}' test.json
 
 
